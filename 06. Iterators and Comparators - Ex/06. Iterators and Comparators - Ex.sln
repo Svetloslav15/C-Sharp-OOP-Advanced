@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.ListIterator", "01.ListIterator\01.ListIterator.csproj", "{DC415F35-82CA-454A-91D1-DA8471131D4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.ListIterator", "01.ListIterator\01.ListIterator.csproj", "{DC415F35-82CA-454A-91D1-DA8471131D4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.Collection", "02.Collection\02.Collection.csproj", "{9E603388-C7C4-40C8-BC65-EF2FBBE24A70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.Collection", "02.Collection\02.Collection.csproj", "{9E603388-C7C4-40C8-BC65-EF2FBBE24A70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.Stack", "03.Stack\03.Stack.csproj", "{0902E18B-C8D7-45CE-8E5E-6980F8C2542E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.Stack", "03.Stack\03.Stack.csproj", "{0902E18B-C8D7-45CE-8E5E-6980F8C2542E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.Froggy", "04.Froggy\04.Froggy.csproj", "{DF00DD04-3E08-4BB6-AFA4-4CB737F8AA4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.Froggy", "04.Froggy\04.Froggy.csproj", "{DF00DD04-3E08-4BB6-AFA4-4CB737F8AA4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.ComparingObjects", "05.ComparingObjects\05.ComparingObjects.csproj", "{C0A55485-2658-40F9-B34E-F5BAFA2BAF68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05.ComparingObjects", "05.ComparingObjects\05.ComparingObjects.csproj", "{C0A55485-2658-40F9-B34E-F5BAFA2BAF68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.StrategyPattern", "06.StrategyPattern\06.StrategyPattern.csproj", "{307B9258-2FF4-45D9-BA2A-79C12F771E58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "06.StrategyPattern", "06.StrategyPattern\06.StrategyPattern.csproj", "{307B9258-2FF4-45D9-BA2A-79C12F771E58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
