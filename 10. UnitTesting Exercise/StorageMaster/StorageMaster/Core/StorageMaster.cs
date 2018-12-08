@@ -66,16 +66,14 @@
 			var loadedProductsCount = 0;
 			foreach (var name in productNames)
 			{
-				if (this.currentVehicle.IsFull)
+                if (!this.productsPool.ContainsKey(name) || !this.productsPool[name].Any())
+                {
+                    throw new InvalidOperationException($"{name} is out of stock!");
+                }
+                if (this.currentVehicle.IsFull)
 				{
 					break;
 				}
-
-				if (!this.productsPool.ContainsKey(name) || !this.productsPool[name].Any())
-				{
-					throw new InvalidOperationException($"{name} is out of stock!");
-				}
-
 				var product = this.productsPool[name].Pop();
 
 				this.currentVehicle.LoadProduct(product);
