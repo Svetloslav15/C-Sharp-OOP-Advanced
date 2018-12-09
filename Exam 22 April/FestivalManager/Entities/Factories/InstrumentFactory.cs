@@ -3,7 +3,6 @@
 	using System;
 	using System.Linq;
 	using System.Reflection;
-	using System.Runtime.InteropServices.WindowsRuntime;
 	using Contracts;
 	using Entities.Contracts;
 	using Instruments;
@@ -12,10 +11,10 @@
 	{
 		public IInstrument CreateInstrument(string typeName)
 		{
-            Type type = Assembly.GetExecutingAssembly()
+            Type type = Assembly.GetCallingAssembly()
                 .GetTypes()
                 .FirstOrDefault(x => x.Name == typeName);
-            IInstrument instrument = (Instrument)Activator.CreateInstance(type);
+            IInstrument instrument = (IInstrument)Activator.CreateInstance(type);
             return instrument;
 		}
 	}

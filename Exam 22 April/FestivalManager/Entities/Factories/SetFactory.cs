@@ -11,10 +11,10 @@
 	{
 		public ISet CreateSet(string name, string type)
 		{
-            Type currType = Assembly.GetExecutingAssembly()
+            Type currType = Assembly.GetCallingAssembly()
                 .GetTypes()
                 .FirstOrDefault(x => x.Name == type);
-            ISet set = (ConcertSet)Activator.CreateInstance(currType);
+            ISet set = (ISet)Activator.CreateInstance(currType, name);
 
             return set;
 		}

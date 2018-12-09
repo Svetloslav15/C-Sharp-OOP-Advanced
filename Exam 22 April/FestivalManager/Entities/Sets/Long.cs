@@ -2,7 +2,7 @@
 {
     using System;
     
-    public class Long : ConcertSet
+    public class Long : Set
     {
         public Long(string name)
             : base(name, new TimeSpan(0, 60, 0))

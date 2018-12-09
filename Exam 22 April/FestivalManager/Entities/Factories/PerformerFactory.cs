@@ -7,7 +7,7 @@
 	{
 		public IPerformer CreatePerformer(string name, int age)
 		{
-			Performer performer = new Performer(name, age);
+			IPerformer performer = new Performer(name, age);
 
 			return performer;
 		}

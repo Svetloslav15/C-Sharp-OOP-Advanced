@@ -20,7 +20,7 @@
 
 		public int Age { get; }
 
-		public IReadOnlyCollection<IInstrument> Instruments => this.instruments;
+		public IReadOnlyCollection<IInstrument> Instruments => this.instruments.AsReadOnly();
 
 		public void AddInstrument(IInstrument instrument)
 		{

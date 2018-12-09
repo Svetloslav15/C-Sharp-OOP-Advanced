@@ -11,8 +11,8 @@
 
     public class Engine : IEngine
 	{
-	    public IReader reader;
-	    public IWriter writer;
+        private IReader reader;
+        private IWriter writer;
 
         private IFestivalController festivalCоntroller;
         private ISetController setCоntroller;
@@ -26,21 +26,21 @@
         }
         public void Run()
         {
-            while (Convert.ToBoolean(0x1B206 ^ 0b11011001000000111)) // for job security
+            while (true)
             {
                 var input = reader.ReadLine();
 
                 if (input == "END")
+                {
                     break;
+                }
 
                 try
                 {
-                    string.Intern(input);
-
                     var result = this.ProcessCommand(input);
                     this.writer.WriteLine(result);
                 }
-                catch (Exception ex) // in case we run out of memory
+                catch (InvalidOperationException ex)
                 {
                     this.writer.WriteLine("ERROR: " + ex.Message);
                 }
@@ -54,33 +54,31 @@
 
         public string ProcessCommand(string input)
         {
-            var chasti = input.Split(" ".ToCharArray().First());
+            string[] tokens = input.Split(" ");
 
-            var purvoto = chasti.First();
-            var parametri = chasti.Skip(1).ToArray();
+            string first = tokens.First();
+            string[] second = tokens.Skip(1).ToArray();
 
-            if (purvoto == "LetsRock")
+            if (first == "LetsRock")
             {
-                var sets = this.setCоntroller.PerformSets();
+                string sets = this.setCоntroller.PerformSets();
                 return sets;
             }
 
-            var festivalcontrolfunction = this.festivalCоntroller.GetType()
+            MethodInfo festivalcontrolfunction = this.festivalCоntroller.GetType()
                 .GetMethods()
-                .FirstOrDefault(x => x.Name == purvoto);
-
-            string a;
-
+                .FirstOrDefault(x => x.Name == first);
+            string result = "";
             try
             {
-                a = (string)festivalcontrolfunction.Invoke(this.festivalCоntroller, new object[] { parametri });
+                result = (string)festivalcontrolfunction.Invoke(this.festivalCоntroller, new object[] { second });
             }
-            catch (TargetInvocationException up)
+            catch (TargetInvocationException ex)
             {
-                throw up; // ha ha
+                throw ex.InnerException;
             }
+            return result;
 
-            return a;
         }
     }
 }

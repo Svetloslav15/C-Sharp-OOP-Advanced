@@ -2,10 +2,10 @@
 {
 	using System;
 
-	public class Short : ConcertSet
+	public class Short : Set
 	{
 		public Short(string name) 
-			: base(name, new TimeSpan(0, 16, 0))
+			: base(name, new TimeSpan(0, 15, 0))
 		{
 		}
 	}
