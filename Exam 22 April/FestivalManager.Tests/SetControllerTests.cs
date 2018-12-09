@@ -2,7 +2,12 @@
 // When you are ready to submit, REMOVE all using statements to your project (entities/controllers/etc)
 namespace FestivalManager.Tests
 {
-
+    using FestivalManager.Core.Controllers;
+    using FestivalManager.Core.Controllers.Contracts;
+    using FestivalManager.Entities;
+    using FestivalManager.Entities.Contracts;
+    using FestivalManager.Entities.Instruments;
+    using FestivalManager.Entities.Sets;
     using NUnit.Framework;
     using System;
 
