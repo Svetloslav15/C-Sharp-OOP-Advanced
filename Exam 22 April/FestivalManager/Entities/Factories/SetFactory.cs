@@ -6,16 +6,15 @@
     using System;
     using System.Linq;
     using System.Reflection;
-    
+
     public class SetFactory : ISetFactory
 	{
-		public ISet CreateSet(string name, string type)
+		public ISet CreateSet(string name, string typeName)
 		{
-            Type currType = Assembly.GetCallingAssembly()
+            Type type = Assembly.GetCallingAssembly()
                 .GetTypes()
-                .FirstOrDefault(x => x.Name == type);
-            ISet set = (ISet)Activator.CreateInstance(currType, name);
-
+                .FirstOrDefault(x => x.Name == typeName);
+            ISet set = (ISet)Activator.CreateInstance(type, name);
             return set;
 		}
 	}

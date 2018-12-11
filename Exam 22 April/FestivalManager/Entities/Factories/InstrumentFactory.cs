@@ -5,17 +5,16 @@
 	using System.Reflection;
 	using Contracts;
 	using Entities.Contracts;
-	using Instruments;
 
 	public class InstrumentFactory : IInstrumentFactory
 	{
 		public IInstrument CreateInstrument(string typeName)
 		{
             Type type = Assembly.GetCallingAssembly()
-                .GetTypes()
-                .FirstOrDefault(x => x.Name == typeName);
-            IInstrument instrument = (IInstrument)Activator.CreateInstance(type);
-            return instrument;
-		}
+               .GetTypes()
+               .FirstOrDefault(x => x.Name == typeName);
+            IInstrument set = (IInstrument)Activator.CreateInstance(type);
+            return set;
+        }
 	}
 }

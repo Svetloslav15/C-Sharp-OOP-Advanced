@@ -14,71 +14,71 @@ namespace FestivalManager.Tests
     [TestFixture]
 	public class SetControllerTests
     {
-        private ISetController setController;
+        private ISetController controller;
         private IStage stage;
+        private ISet set;
 
         [SetUp]
         public void SetUp()
         {
             this.stage = new Stage();
-            this.setController = new SetController(stage);
+            this.controller = new SetController(this.stage);
+            this.set = new Long("Test");
         }
-        [Test]
-	    public void CheckWhenWeHavePerformance()
+		[Test]
+	    public void CheckNotPerform()
 	    {
-            IPerformer performer = new Performer("Pesho", 15);
-            ISong song = new Song("First", new TimeSpan(0, 4, 0));
+            IPerformer performer = new Performer("Ivan", 23);
             IInstrument instrument = new Drums();
-            ISet set = new Long("LongSet");
+            ISong song = new Song("I am a Dreamer!", new TimeSpan(0, 4, 0));
 
             performer.AddInstrument(instrument);
-            set.AddPerformer(performer);
-            set.AddSong(song);
-            this.stage.AddSong(song);
-            this.stage.AddPerformer(performer);
+            this.set.AddPerformer(performer);
             this.stage.AddSet(set);
-
-            string actualResult = setController.PerformSets();
-            string expectedResult = "1. LongSet:\r\n-- 1. First (04:00)\r\n-- Set Successful";
+            
+            string actualResult = this.controller.PerformSets();
+            string expectedResult = "1. Test:\r\n-- Did not perform";
             Assert.AreEqual(actualResult, expectedResult);
         }
 
         [Test]
-        public void CheckWhenWeDontHavePerformance()
+        public void CheckPerform()
         {
-            IPerformer performer = new Performer("Pesho", 15);
-            ISong song = new Song("First", new TimeSpan(0, 4, 0));
+            IPerformer performer = new Performer("Ivan", 23);
             IInstrument instrument = new Drums();
-            ISet set = new Long("LongSet");
+            ISong song = new Song("I am a Dreamer!", new TimeSpan(0, 4, 0));
 
-            set.AddPerformer(performer);
-            set.AddSong(song);
+            performer.AddInstrument(instrument);
+            this.set.AddPerformer(performer);
+            this.set.AddSong(song);
+
+            this.stage.AddSet(set);
             this.stage.AddSong(song);
             this.stage.AddPerformer(performer);
-            this.stage.AddSet(set);
 
-            string actualResult = setController.PerformSets();
-            string expectedResult = "1. LongSet:\r\n-- Did not perform";
+            string actualResult = this.controller.PerformSets();
+            string expectedResult = "1. Test:\r\n-- 1. I am a Dreamer! (04:00)\r\n-- Set Successful";
             Assert.AreEqual(actualResult, expectedResult);
         }
 
         [Test]
-        public void CheckInstrument_AfterPerformance_ShouldBeWornDown()
+        public void CheckInstrumentWearDown()
         {
-            IPerformer performer = new Performer("Pesho", 15);
-            ISong song = new Song("First", new TimeSpan(0, 4, 0));
+            IPerformer performer = new Performer("Ivan", 23);
             IInstrument instrument = new Drums();
-            ISet set = new Long("LongSet");
+            double wear = instrument.Wear;
+            ISong song = new Song("I am a Dreamer!", new TimeSpan(0, 4, 0));
 
             performer.AddInstrument(instrument);
-            set.AddPerformer(performer);
-            set.AddSong(song);
+            this.set.AddPerformer(performer);
+            this.set.AddSong(song);
+
+            this.stage.AddSet(set);
             this.stage.AddSong(song);
             this.stage.AddPerformer(performer);
-            this.stage.AddSet(set);
-            setController.PerformSets();
 
-            Assert.AreEqual(instrument.Wear, 80);
+            this.controller.PerformSets();
+            Assert.AreNotEqual(instrument.Wear, wear);
         }
-    }
+	}
 }

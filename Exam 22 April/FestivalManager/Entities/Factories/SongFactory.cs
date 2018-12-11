@@ -8,7 +8,7 @@
 	{
 		public ISong CreateSong(string name, TimeSpan duration)
 		{
-			ISong song = new Song(name, duration);
+			var song = new Song(name, duration);
 			return song;
 		}
 	}

@@ -2,83 +2,85 @@
 {
 	using System.Reflection;
 	using Contracts;
-	using Controllers;
 	using Controllers.Contracts;
 	using IO.Contracts;
     using System;
     using System.Linq;
     using FestivalManager.Core.IO;
 
-    public class Engine : IEngine
+    class Engine : IEngine
 	{
-        private IReader reader;
+	    private IReader reader;
         private IWriter writer;
 
         private IFestivalController festivalCоntroller;
         private ISetController setCоntroller;
-        
-        public Engine(IFestivalController fesC, ISetController setC)
+
+        public Engine(IFestivalController fControlcler, ISetController sController)
         {
-            this.setCоntroller = setC;
-            this.festivalCоntroller = fesC;
+            this.festivalCоntroller = fControlcler;
+            this.setCоntroller = sController;
             this.reader = new ConsoleReader();
             this.writer = new ConsoleWriter();
         }
-        public void Run()
-        {
-            while (true)
-            {
-                var input = reader.ReadLine();
 
-                if (input == "END")
+		public void Run()
+		{
+			while (true)
+			{
+				string input = reader.ReadLine();
+
+				if (input == "END")
                 {
                     break;
                 }
 
-                try
-                {
-                    var result = this.ProcessCommand(input);
-                    this.writer.WriteLine(result);
-                }
-                catch (InvalidOperationException ex)
-                {
-                    this.writer.WriteLine("ERROR: " + ex.Message);
-                }
-            }
+				try
+				{
+					string result = this.ProcessCommand(input);
+					this.writer.WriteLine(result);
+				}
+				catch (Exception ex)
+				{
+					this.writer.WriteLine("ERROR: " + ex.Message);
+				}
+			}
 
-            var end = this.festivalCоntroller.ProduceReport();
+			string end = this.festivalCоntroller.ProduceReport();
 
-            this.writer.WriteLine("Results:");
-            this.writer.WriteLine(end);
-        }
+			this.writer.WriteLine("Results:");
+			this.writer.WriteLine(end);
+		}
 
         public string ProcessCommand(string input)
         {
-            string[] tokens = input.Split(" ");
+            string[] tokens = input.Split();
 
-            string first = tokens.First();
-            string[] second = tokens.Skip(1).ToArray();
+            string command = tokens.First();
+            string[] parameters = tokens.Skip(1).ToArray();
 
-            if (first == "LetsRock")
+            if (command == "LetsRock")
             {
-                string sets = this.setCоntroller.PerformSets();
-                return sets;
+                var setovete = this.setCоntroller.PerformSets();
+                return setovete;
             }
 
-            MethodInfo festivalcontrolfunction = this.festivalCоntroller.GetType()
+            var festivalcontrolfunction = this.festivalCоntroller.GetType()
                 .GetMethods()
-                .FirstOrDefault(x => x.Name == first);
-            string result = "";
+                .FirstOrDefault(x => x.Name == command);
+
+            string a;
+
             try
             {
-                result = (string)festivalcontrolfunction.Invoke(this.festivalCоntroller, new object[] { second });
+                a = (string)festivalcontrolfunction.Invoke(this.festivalCоntroller, new object[] { parameters });
             }
-            catch (TargetInvocationException ex)
+            catch (TargetInvocationException up)
             {
-                throw ex.InnerException;
+                throw up.InnerException;
             }
-            return result;
 
+            return a;
         }
     }
 }

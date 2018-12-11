@@ -2,7 +2,6 @@
 {
 	using System.Collections.Generic;
 	using Contracts;
-	using Instruments;
 
 	public class Performer : IPerformer
 	{

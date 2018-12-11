@@ -1,13 +1,13 @@
 ﻿namespace FestivalManager.Core.IO
 {
-	using System;
-	using Contracts;
+    using FestivalManager.Core.IO.Contracts;
+    using System;
 
-	public class ConsoleReader : IReader
-	{
-		public string ReadLine()
-		{
-			return Console.ReadLine();
-		}
-	}
+    public class ConsoleReader : IReader
+    {
+        public string ReadLine()
+        {
+            return Console.ReadLine();
+        }
+    }
 }
